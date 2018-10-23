@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  {%load staticfiles%}
+ <link rel="stylesheet" type="text/css" href="{%static 'susukkang/css/details.css'%}"/>
+
+  <title>메인화면</title>
+</head>
+<script type="text/javascript">
+function popupOpen(){
+
+	var popUrl = "{%url 'test' %}";	//팝업창에 출력될 페이지 URL
+
+	var popOption = "width=1300, height=700, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+
+		window.open(popUrl,"",popOption);
+
+	}
+	
+function popupOpen1(){
+
+	var popUrl = "{%url 'testt' %}";	//팝업창에 출력될 페이지 URL
+
+	var popOption = "width=1300, height=700, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+
+		window.open(popUrl,"",popOption);
+
+	}
+</script>
+<div class="header">
+  <h1>수수깡</h1>
+  <p>수포자들을 위한 맞춤형 솔루션</p>
+</div>
+
+<div class="topnav">
+  <a href="{%url 'levelTest' %}">진단평가</a>
+  <a href="{%url 'main' %}">학습하기</a>
+  <a href="{%url 'myPage' %}">마이페이지</a>
+  <a href="#" style="float:right">로그아웃</a>
+</div>
+
+<div class="row">
+  <div class="leftcolumn">
+    <div class="card" style="padding:50px;">
+      <h1>학습하기</h1>
+      <div class="fakeimg" style="height:200px;">Image</div>
+      <a href="javascript:popupOpen();"><h2>미적분 학습하기</h2></a>
+      <a href="javascript:popupOpen1();"><h2>미적분 학습하기2</h2></a>
+    </div>
+  </div>
+  <div class="rightcolumn">
+    <div class="card" style="text-align:center">
+    <h2>< Part ></h2>
+      <h3>수1</h3>
+      <h3>수2</h3>
+      <h3>미적분</h3>
+      <h3>확률과 통계</h3>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <h4>INFORMATION</h4>
+	<h5>수수깡 | 한이음</h5>
+	<h5>수포자를 위한 맞춤형 솔루션</h5>
+	<h5>문의 | 010-0000-0000</h5>
+</div>
+
+</body>
+</html>

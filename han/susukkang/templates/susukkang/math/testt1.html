@@ -1,0 +1,131 @@
+<html>
+<head>
+<meta charset="UTF-8">
+{%load staticfiles%}
+<link rel="stylesheet" type="text/css" href="{%static 'susukkang/css/popup.css'%}"/>
+<title>학습하기</title>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+</head>
+
+<body>
+<div class="header">
+  <h1>미적분</h1>
+</div>
+
+        <script type="text/javascript">
+                {%load staticfiles%}
+                var pr_index = -1;
+                var pr_arr = new Array();
+                var pr_size = 0;
+                {% for problem in problems %}
+                    var obj = new Object();
+                    obj.pr_id = {{problem.pr_id}};
+                    obj.ans = {{problem.ans}};
+                    obj.unit = {{problem.unit}};
+                    pr_arr.push(obj);
+                    pr_size+=1;
+                {% endfor %}
+
+                $(function(){
+                        $('.column1 img').click(function(){
+                                pr_index-=1;
+                                if(pr_index<0){
+                                        alert('처음 문제입니다');
+                                        pr_index+=1;
+                                }
+                                else{
+                                        $('.card img').attr("src", "{{STATIC_URL}}../static/susukkang/images/questions/"+pr_arr[pr_index].pr_id+".png");
+                                        $('#problem').text(pr_arr[pr_index].pr_id);
+                                }
+                        });
+                        $('.column3 img').click(function(){
+                                pr_index+=1;
+                                if(pr_index>=pr_size){
+                                        alert('마지막 문제입니다');
+                                        pr_index-=1;
+                                }
+                                else{
+                                        $('#pimage').attr("src", "{{STATIC_URL}}../static/susukkang/images/questions/"+pr_arr[pr_index].pr_id+".png");
+                                        $('#problem').text(pr_arr[pr_index].pr_id);
+                                }
+                        });
+
+                });
+                function submitFunction() {
+                        //"answer10.json" json파일 생성, 구조는 {problem_id: 라디오 버튼에서 선택한 값(value), ...} 
+                        // -> 새로운 파이썬함수 연결하여 실행할 예정(정답비교, history 저장) & 채점된 새 창 띄울예정
+                        
+                        // var txt1 = document.getElementById("txt1").value;
+                        // var txt2 = document.getElementById("txt2").value;
+                        // var txt3 = document.getElementById("txt3").value;
+                        // ans_arr[7] = txt1; ans_arr[8] = txt2; ans_arr[9] = txt3;
+
+                        // alert("채점 : "+ans_arr);
+                }
+        </script>
+
+
+ 	<p id="num" style="display:none">0</p>
+        <p id="img"></p>
+    <div class="row">
+	  <div class="column1">
+            <a><img id="left" src="{%static 'susukkang/images/left.png'%}" width="40"></a>
+      </div>
+	  <div class="column2" style="width:50%">
+	  <div class="card">
+                <img id= "pimage" width="100%" src="">
+                <script type="text/javascript">
+                        {%load staticfiles%}
+                        var pimage = document.getElementById('pimage');
+                        var link = "../static/susukkang/images/questions/";
+                        var pname = {{ problems.0.pr_id }};
+                        pimage.src = link.concat(pname,".png");
+                </script>
+       </div>
+
+	   <div id="multiple" style="width:100%; display:block">
+	   	 <button class="button">1</button>
+		  <button class="button">2</button>
+		  <button class="button">3</button>
+		  <button class="button">4</button>
+		  <button class="button">5</button>
+		 </div>
+
+		<div id="discussion" style="width:100%; float:center; text-align: center; display:none">
+		 <a>정답 </a>
+    	<input type="text" id="disc" name="disc">
+		 </div>
+
+		 <div id="submitBtn">
+		 <a href="javascript:doCheck()"><button class="submit">채점하기</button></a>
+		 </div>
+
+		 <div id="nextBtn" style="display:none">
+		 <a href="javascript:showAnswer()"><button class="submit" style="float:left">해설보기</button></a>
+		 <a href="javascript:plusFunc()"><button class="submit" style="float:right">다음문제</button></a>
+		 </div>
+		 <div id="answerShow" style="width:100%; display:none; text-align:center">
+		 	<img id="answer" style="margin:10%" width="80%" src="../Answer/1.png">
+		 </div>
+	  </div>
+	  <div class="column3">
+                <a><img id="right" src="{%static 'susukkang/images/right.png'%}" width="40"></a>
+      </div>
+
+	   <div id="column4" class="column4" style="width:35%; margin-right:5%; display:none">
+	   <img id="s1" src="../Answer/1-1.png" width="100%">
+	   <img id="s2" src="../Answer/1-2.png" width="100%" style="display:none" >
+	   <img id="s3" src="../Answer/1-3.png" width="100%" style="display:none">
+	   <a>정답 </a>
+    	<input type="text" id="disc" name="disc">
+    	<div id="submitBtn">
+		 <a href="javascript:doCheck()"><button class="submit">채점하기</button></a>
+	   </div>
+	   <div id="nextBtn" style="display:none">
+		 <a href="javascript:pplusFunc()"><button class="submit" style="float:right">다음문제</button></a>
+		</div>
+	</div>
+	</div>
+
+</body>
+</html>

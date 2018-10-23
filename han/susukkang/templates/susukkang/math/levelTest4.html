@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+{%load staticfiles%}
+<link rel="stylesheet" type="text/css" href="{%static 'susukkang/css/popup.css'%}"/>
+<title>진단평가</title>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+</head>
+
+<body>
+<div class="header">
+  <h1>진단평가가</h1>
+</div>
+
+	<script type="text/javascript">
+		{%load staticfiles%}
+		var pr_index = -1;
+		var pr_arr = new Array();
+
+		{% for problem in problems %}
+		    var obj = new Object();
+		    obj.pr_id = {{problem.pr_id}};
+		    obj.ans = {{problem.ans}};
+		    obj.unit = {{problem.unit}};
+		    pr_arr.push(obj);
+		{% endfor %}
+
+		$(function(){
+			$('.column1 img').click(function(){
+				pr_index-=1;
+				$('.card img').attr("src", "{{STATIC_URL}}../static/susukkang/images/questions/"+pr_arr[pr_index].pr_id+".png");
+				$('#problem').text(pr_arr[pr_index].pr_id);
+			});
+			$('.column3 a img').click(function(){
+				pr_index+=1;
+				$('.card img').attr("src", "{{STATIC_URL}}../static/susukkang/images/questions/"+pr_arr[pr_index].pr_id+".png");
+				$('#problem').text(pr_arr[pr_index].pr_id);
+			});
+
+		});
+		function prFunction(n) {
+	  		$('#pimage').attr("src", "../static/susukkang/images/questionss/"+pr_arr[n].pr_id+".png");
+			$('#problem').text(pr_arr[n].pr_id);
+			pr_index = n;
+	  	}
+
+	  	function ansFunction(i,n) {
+	  		ans_arr[i] = n;
+	  		alert(i + " / " + ans_arr);
+	  	}
+
+	  	function submitFunction() {
+	  		//"answer10.json" json파일 생성, 구조는 {problem_id: 라디오 버튼에서 선택한 값(value), ...} 
+	  		// -> 새로운 파이썬함수 연결하여 실행할 예정(정답비교, history 저장) & 채점된 새 창 띄울예정
+
+	  		// var txt1 = document.getElementById("txt1").value;
+	  		// var txt2 = document.getElementById("txt2").value;
+	  		// var txt3 = document.getElementById("txt3").value;
+	  		// ans_arr[7] = txt1; ans_arr[8] = txt2; ans_arr[9] = txt3;
+
+	  		// alert("채점 : "+ans_arr);
+	  	}
+	</script>
+
+
+	<p id="num" style="display:none">0</p>
+  	<p id="img"></p>
+    <div class="row">
+        <div class="column1">
+            <a><img src="{%static 'susukkang/images/left.png'%}" width="40"></a>
+        </div>
+        <div class="column2">
+            <div class="card">
+    	       <img id= "aaa" width="100%" src="{%static 'susukkang/images/math.jpg'%}">
+			</div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>문제이름</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+					    <td><p id=problem>{{ problems.0.pr_id }}</p></td>
+                    </tr>   
+                </tbody>
+            </table>
+		</div>
+	    <div class="column3">
+	    	<a><img src="{%static 'susukkang/images/right.png'%}" width="40"></a>
+	    </div>
+
+
+	  	<div class="column4">
+	  	<div class="card">
+	    <table style="width:100%">
+	    <tr><th style="text-align:center;padding-left:30px"><p>답안지</p></th></tr>
+		<script type="text/javascript">i=1;</script>
+	    {% csrf_token %}
+		{% for pr in problems %}
+			<tr><td style="text-align:center;padding-left:30px;"><script type="text/javascript">document.write(i);i+=1;</script>번: 
+			<label><input type=radio name={{pr.pr_id}} value="1"/>1</label>
+			<label><input type=radio name={{pr.pr_id}} value="2"/>2</label>
+			<label><input type=radio name={{pr.pr_id}} value="3"/>3</label>
+			<label><input type=radio name={{pr.pr_id}} value="4"/>4</label>
+			<label><input type=radio name={{pr.pr_id}} value="5"/>5</label>
+			</td></tr>
+		{% endfor %}
+	    <tr><td style="text-align:center; padding-left: 30px; padding-right:20px">
+	    <button class="number3" onclick="submitFunction()">채점하기</button>
+	    </td></tr>
+	    </table>
+	      </div>
+	   </div>
+	</div>
+
+</body>
+</html>

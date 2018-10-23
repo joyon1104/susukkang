@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="../css/popup.css?ver=1"/>
+<title>학습하기</title>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+</head>
+
+<style>
+.btn-group {
+	margin-left: 20px;
+	width:100%;
+}
+.button {
+    background-color: #4CAF50; /* Green */
+    border: 1px solid green;
+    color: white;
+    width:50px;
+    height:50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: center;
+    margin-top:5px;
+    margin-bottom:10px;
+}
+
+.submit {
+    background-color: black; /* Green */
+    border: 1px solid black;
+    color: white;
+    width:150px;
+    height:50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: center;
+    margin-top:15px;
+    margin-bottom:10px;
+}
+
+.button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+}
+.button:hover {
+    background-color: #3e8e41;
+}
+
+
+
+input[type=text] {
+    width: 200px;
+    height: 40px;
+    margin-bottom:5px;
+    box-sizing: border-box;
+}
+
+</style>
+
+<body>
+<div class="header">
+  <h1>미적분</h1>
+</div>
+	<p id="num">1</p>
+  	<p id="img">1</p>
+  	<p id="ans">1</p>
+ <script>
+	function plusFunc(){
+		var i = $("#num").text();
+		i = parseInt(i);
+		if(i>0 && i<7){
+			i++;
+			$("#num").text(i);
+			$("#img").text(i);
+			$("#ans").text(i);
+			
+			$("#img").append(".png");
+			$("#ans").append(".png");
+			$("#img").prepend("../Question/");
+			$("#ans").prepend("../Answer/");
+			
+			$("#problem").attr("src",$("#img").text());
+			$("#answer").attr("src",$("#ans").text());
+			
+		}
+		
+		var multiple = document.getElementById("multiple");
+		var discussion = document.getElementById("discussion");
+		//if(i>21){ 실제 문제에서는 이렇게
+		if(i>5){
+			multiple.style.display= 'none';
+			discussion.style.display= 'block';	
+		}
+		else{
+			multiple.style.display= 'block';
+			discussion.style.display= 'none';	
+		}
+		
+		var submitBtn = document.getElementById("submitBtn");
+		var nextBtn = document.getElementById("nextBtn");
+		submitBtn.style.display= 'block';
+		nextBtn.style.display= 'none';
+		
+		var answerShow = document.getElementById("answerShow");
+		answerShow.style.display= 'none';
+		
+		var left = document.getElementById("left");
+		var right = document.getElementById("right");
+		left.style.display= 'block';
+		right.style.display= 'block';
+	}
+	
+	function minusFunc(){
+		var i = $("#num").text();
+		i = parseInt(i);
+		if(i>1 && i<8){
+			i--;
+			$("#num").text(i);
+			$("#img").text(i);
+			$("#ans").text(i);
+			$("#img").append(".png");
+			$("#ans").append(".png");
+			$("#img").prepend("../Question/");
+			$("#ans").prepend("../Answer/");
+			
+			$("#problem").attr("src",$("#img").text());
+			$("#answer").attr("src",$("#ans").text());
+		}
+		
+		var multiple = document.getElementById("multiple");
+		var discussion = document.getElementById("discussion");
+		//if(i>21){ 실제 문제에서는 이렇게
+		if(i>5){
+			multiple.style.display= 'none';
+			discussion.style.display= 'block';	
+		}
+		else{
+			multiple.style.display= 'block';
+			discussion.style.display= 'none';	
+		}
+	}
+	
+	function doCheck(){
+		var submitBtn = document.getElementById("submitBtn");
+		var nextBtn = document.getElementById("nextBtn");
+		submitBtn.style.display= 'none';
+		nextBtn.style.display= 'block';
+	}
+	
+	function showAnswer(){
+		var answerShow = document.getElementById("answerShow");
+		answerShow.style.display= 'block';
+		
+		var left = document.getElementById("left");
+		var right = document.getElementById("right");
+		left.style.display= 'none';
+		right.style.display= 'none';
+	}
+	</script>
+
+<div class="row" style="float:center; text-align:center">
+	  <div id="column1" class="column1" style="margin-left:10%">
+	  	<a href="javascript:minusFunc()"><img id="left" src="../images/left.png" width="50"></a></div>
+	  <div class="column2" style="width:50%">
+	  <div class="card">
+	    <img id="problem" width="100%" src="../Question/1.png">
+	  </div>
+	   <div id="multiple" style="width:100%; display:block">
+	   	 <button class="button">1</button>
+		  <button class="button">2</button>
+		  <button class="button">3</button>
+		  <button class="button">4</button>
+		  <button class="button">5</button>
+		 </div>
+		<div id="discussion" style="width:100%; float:center; text-align: center; display:none">
+		 <a>정답 </a>
+    	<input type="text" id="disc" name="disc">
+		 </div>
+		 <div id="submitBtn">
+		 <a href="javascript:doCheck()"><button class="submit">채점하기</button></a>
+		 </div>
+		 <div id="nextBtn" style="display:none">
+		 <a href="javascript:showAnswer()"><button class="submit" style="float:left">해설보기</button></a>
+		 <a href="javascript:plusFunc()"><button class="submit" style="float:right">다음문제</button></a>
+		 </div>
+		 <div id="answerShow" style="width:100%; display:none; text-align:center">
+		 	<img id="answer" style="margin:10%" width="80%" src="../Answer/1.png">
+		 </div>
+	  </div>
+	  <div id="column3" class="column3" style="margin-right:10%">
+	   <a href="javascript:plusFunc()"><img id="right" src="../images/right.png" width="50" ></a></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+@CHARSET "UTF-8";
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial;
+    background: white;
+}
+
+/* Header/Blog Title */
+.header {
+    padding: 30px;
+    text-align: center;
+    background: #008000;
+}
+
+.header h1 {
+    font-size: 30px;
+    color: white;
+}
+
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.column1 {   
+    float: left;
+    width: 10%;
+    text-align:center;
+    padding-top: 130px;
+}
+
+/* Right column */
+.column2 {
+    float: left;
+    width: 50%;
+    text-align:center;
+    padding-top: 20px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.column3 {
+    float: left;
+    width: 10%;
+    text-align:center;
+    padding-top: 130px;
+
+}
+
+.column4 {
+    float: left;
+    width: 25%;
+    text-align:center;
+}
+
+.card {
+    background-color: white;
+    padding: 5px;
+    margin-bottom: 20px;
+    text-align:center;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 1100px) {
+    .colunm1, .column2, .column3, .column4 {   
+        width: 100%;
+        padding: 10;
+    }
+}
+
+.btn-group {
+    margin-left: 20px;
+    width:100%;
+}
+.button {
+    background-color: #4CAF50; /* Green */
+    border: 1px solid green;
+    color: white;
+    width:40px;
+    height:40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+    margin-bottom:5px;
+}
+.button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+}
+.button:hover {
+    background-color: #3e8e41;
+}
+
+.number {
+    background-color: white; /* Green */
+    border: 1px solid green;
+    color: black;
+    width:40px;
+    height:40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+    margin-bottom:7px;
+    margin-right:15px;
+}
+
+.number2 {
+    background-color: white; /* Green */
+    border: 1px solid green;
+    color: black;
+    width:40px;
+    height:40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+    margin-bottom:7px;
+}
+.number3 {
+    background-color: black; /* Green */
+    color: white;
+    width: 100%;
+    height:50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    cursor: pointer;
+    float: center;
+    margin-bottom:7px;
+}
+
+input[type=text] {
+    width: 200px;
+    height: 40px;
+    margin-bottom:5px;
+    box-sizing: border-box;
+}
+
